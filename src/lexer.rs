@@ -18,18 +18,22 @@ pub struct Lexer {
 impl Lexer {
     pub fn new(source: &str) -> Self {
         let chars: Vec<char> = source.chars().collect();
-        let first_char = if chars.is_empty() { '\0' } else { chars[0] };
         
         Self {
             source: chars,
             position: 0,
-            current_char: first_char,
+            current_char: '\0',
             buffer: String::new(),
         }
     }
 
     pub fn next_token(&mut self) -> String {
         self.buffer.clear();
+        
+        // Initialize current_char on first call
+        if self.position == 0 && self.current_char == '\0' {
+            self.get_char();
+        }
         
         while self.current_char.is_whitespace() && self.current_char != '\0' {
             self.get_char();
