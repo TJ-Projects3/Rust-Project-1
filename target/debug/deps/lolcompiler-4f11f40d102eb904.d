@@ -1,0 +1,9 @@
+C:\Users\TiwaP\OneDrive\Documents\Rust Project 1\target\debug\deps\lolcompiler-4f11f40d102eb904.d: src\main.rs src\compiler.rs src\lexer.rs src\parser.rs src\semantic.rs
+
+C:\Users\TiwaP\OneDrive\Documents\Rust Project 1\target\debug\deps\liblolcompiler-4f11f40d102eb904.rmeta: src\main.rs src\compiler.rs src\lexer.rs src\parser.rs src\semantic.rs
+
+src\main.rs:
+src\compiler.rs:
+src\lexer.rs:
+src\parser.rs:
+src\semantic.rs:
