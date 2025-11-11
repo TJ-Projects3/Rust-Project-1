@@ -18,7 +18,7 @@ pub struct Lexer {
 impl Lexer {
     pub fn new(source: &str) -> Self {
         let chars: Vec<char> = source.chars().collect();
-        
+
         Self {
             source: chars,
             position: 0,
@@ -29,12 +29,12 @@ impl Lexer {
 
     pub fn next_token(&mut self) -> String {
         self.buffer.clear();
-        
+
         // Initialize current_char on first call
         if self.position == 0 && self.current_char == '\0' {
             self.get_char();
         }
-        
+
         while self.current_char.is_whitespace() && self.current_char != '\0' {
             self.get_char();
         }
@@ -60,13 +60,16 @@ impl Lexer {
         }
 
         let current_buffer = self.buffer.clone().to_lowercase();
-        
-        if matches!(current_buffer.as_str(), "#maek" | "#gimmeh" | "#i" | "#it" | "#lemme") {
+
+        if matches!(
+            current_buffer.as_str(),
+            "#maek" | "#gimmeh" | "#i" | "#it" | "#lemme"
+        ) {
             while self.current_char == ' ' || self.current_char == '\t' {
                 self.add_char(self.current_char);
                 self.get_char();
             }
-            
+
             while self.current_char.is_alphabetic() {
                 self.add_char(self.current_char);
                 self.get_char();
@@ -74,7 +77,7 @@ impl Lexer {
         }
 
         let token = self.buffer.clone();
-        
+
         if !self.lookup(&token) {
             eprintln!("Lexical error: '{}' is not a valid keyword", token);
             process::exit(1);
@@ -99,7 +102,7 @@ impl LexicalAnalyzer for Lexer {
             self.current_char = '\0';
             return '\0';
         }
-        
+
         self.current_char = self.source[self.position];
         self.position += 1;
         self.current_char
@@ -113,10 +116,25 @@ impl LexicalAnalyzer for Lexer {
         let lower = s.to_lowercase();
         matches!(
             lower.as_str(),
-            "#hai" | "#kthxbye" | "#obtw" | "#tldr" | "#maek head" | "#maek paragraf"
-            | "#maek list" | "#gimmeh italics" | "#gimmeh title" | "#gimmeh item"
-            | "#gimmeh newline" | "#gimmeh soundz" | "#gimmeh vidz" | "#gimmeh bold"
-            | "#mkay" | "#oic" | "#i haz" | "#it iz" | "#lemme see"
+            "#hai"
+                | "#kthxbye"
+                | "#obtw"
+                | "#tldr"
+                | "#maek head"
+                | "#maek paragraf"
+                | "#maek list"
+                | "#gimmeh italics"
+                | "#gimmeh title"
+                | "#gimmeh item"
+                | "#gimmeh newline"
+                | "#gimmeh soundz"
+                | "#gimmeh vidz"
+                | "#gimmeh bold"
+                | "#mkay"
+                | "#oic"
+                | "#i haz"
+                | "#it iz"
+                | "#lemme see"
         )
     }
 }
